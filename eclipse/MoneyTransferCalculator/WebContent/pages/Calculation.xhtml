@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:ez="http://java.sun.com/jsf/composite/demo">
+	
+	<h:head></h:head>
+
+	<ui:composition template="/templates/common.xhtml">
+
+		<ui:define name="pageTitle">Money Transfer Calculator</ui:define>
+
+		<ui:define name="pageHeader">Money Transfer Calculator</ui:define>
+
+		<ui:define name="body">
+		<h:form id="moneyTransfer">
+		
+			<h:message showSummary="true" showDetail="false" style="color: red; font-weight: bold;" for="moneyTransfer" />
+	<rich:panel>
+		<h:panelGrid columns="3" style="align:left">
+<h:outputText value="You Send" style="font-weight:bold;"></h:outputText>
+<h:inputText value="#{mainCalculator.youSend}" />
+<h:outputText value="#{mainCalculator.senderCurrency}" />
+
+<h:outputText value="Transfer Fees" style="font-weight:bold;" />
+<h:inputText value="#{mainCalculator.moneyTransferFee}"/>
+<h:outputText value="#{mainCalculator.senderCurrency}" />
+
+<h:outputText value="Discount Code" style="font-weight:bold;"></h:outputText>
+<h:inputText value="#{mainCalculator.discountCode}" />
+<t:div style="width:10px;"></t:div>
+<t:div style="width:10px;"></t:div>
+<h:commandButton value="Get Discount" action="#{mainCalculator.discountEnter}" />
+<t:div style="width:10px;"></t:div>
+
+
+<h:outputText value="Discount" style="font-weight:bold;" />
+
+<h:inputText value="#{mainCalculator.discountMoney}" />
+<h:outputText value="#{mainCalculator.senderCurrency}" />
+
+<t:div style="width:10px;"></t:div>
+<h:commandButton value="Continue" action="#{mainCalculator.continueButton}" />
+<t:div style="width:10px;"></t:div>
+</h:panelGrid>
+<t:div rendered="#{mainCalculator.summaryRendered}">
+<fieldset style="width:px;">
+<legend style="color: Black; font-weight: bold;">Summary</legend>
+
+<h:panelGrid columns="3" rendered="#{mainCalculator.summaryRendered}" >
+
+<h:outputText value="Total Payment" style="font-weight:bold;" />
+<h:inputText value="#{mainCalculator.totalmoneySend}" />
+<h:outputText value="#{mainCalculator.senderCurrency}" />
+
+<h:outputText value="Transfer Fee" style="font-weight:bold;" />
+<h:inputText value="#{mainCalculator.moneyTransferFee}" />
+<h:outputText value="#{mainCalculator.senderCurrency}" />
+
+<h:outputText value="Beneficiary Received" style="font-weight:bold;" />
+<h:inputText value="#{mainCalculator.receiveMoney} " />
+<h:outputText value="#{mainCalculator.receiverCurrency}" />
+
+
+</h:panelGrid>
+
+
+</fieldset>
+	</t:div>
+	</rich:panel>
+	
+			<t:saveState value="#{mainCalculator.currencyCodeList}"></t:saveState>
+			<t:saveState value="#{mainCalculator.exchangeRate}"></t:saveState>
+			<t:saveState value="#{mainCalculator.receiveMoney}"></t:saveState>
+			<t:saveState value="#{mainCalculator.receiverCurrency}"></t:saveState>
+			<t:saveState value="#{mainCalculator.senderCurrency}"></t:saveState>
+			<t:saveState value="#{mainCalculator.youSend}"></t:saveState>
+			<t:saveState value="#{mainCalculator.moneyTransferFee}"></t:saveState>
+			<t:saveState value="#{mainCalculator.discountMoney}"></t:saveState>
+			
+			</h:form>
+			
+				</ui:define>
+	</ui:composition>
+</html>

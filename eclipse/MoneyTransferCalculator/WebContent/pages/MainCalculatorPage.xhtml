@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:ez="http://java.sun.com/jsf/composite/demo">
+<f:view>
+	<h:head></h:head>
+
+	<ui:composition template="/templates/common.xhtml">
+
+		<ui:define name="pageTitle">Money Transfer Calculator</ui:define>
+
+		<ui:define name="pageHeader">Money Transfer Calculator</ui:define>
+
+		<ui:define name="body">
+		<h:form id="moneyTransfer">
+		
+			<h:message showSummary="true" showDetail="false" style="color: red; font-weight: bold;" for="moneyTransfer" />
+	<rich:panel>
+<h:panelGrid columns="1" style="align:left">
+<h:outputText value="Destination Country" style="font-weight:bold;"></h:outputText>
+
+<h:selectOneMenu value="#{mainCalculator.countryCode}">
+<f:selectItem itemValue="1" itemLabel="Zimbabwe"/>
+<f:selectItem itemValue="2" itemLabel="South Africa"/>
+<f:ajax listener="#{mainCalculator.changecountryCode}" render="moneyTransfer" immediate="true">
+
+</f:ajax>
+</h:selectOneMenu>
+<t:div style="width:10px;"></t:div>
+
+<h:outputText id="receiverCurrency" value="Receive Amount #{mainCalculator.receiverCurrency}" style="font-weight:bold;" />
+
+<h:inputText value="#{mainCalculator.receiveMoney}" style=" width : 97px;"/>
+<h:outputText value="Sender Currency" style="font-weight:bold;" />
+
+<h:selectOneMenu id="sender"  value="#{mainCalculator.selectedItem}">
+<f:selectItems value="#{mainCalculator.currencyCodeList}"/>
+</h:selectOneMenu>
+
+<t:div style="width:100px;"></t:div>
+<h:commandButton action="#{mainCalculator.calculate}"  value="Calculate" />
+
+
+			</h:panelGrid>
+	</rich:panel>
+	
+			
+			
+			</h:form>
+			
+			<t:saveState value="#{mainCalculator.receiveMoney}"></t:saveState>
+			<t:saveState value="#{mainCalculator.currencyCodeList}"></t:saveState>
+			<t:saveState value="#{mainCalculator.exchangeRate}"></t:saveState>
+			<t:saveState value="#{mainCalculator.receiveMoney}"></t:saveState>
+	        <t:saveState value="#{mainCalculator.receiverCurrency}"></t:saveState>
+	         <t:saveState value="#{mainCalculator.senderCurrency}"></t:saveState>
+	         <t:saveState value="#{mainCalculator.countryCode}"></t:saveState>
+			
+			
+			
+				</ui:define>
+	</ui:composition>
+	</f:view>
+</html>
